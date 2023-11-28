@@ -35,7 +35,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.quizheads.R
-import com.example.quizheads.ui.theme
+import com.example.quizheads.ui.theme.QuizHeadsTheme
+import com.example.quizheads.ui.theme.Purple40
+
 // notes.app.ui.theme.NotesTheme
 // import com.notes.app.ui.theme.Purple40
 
@@ -140,7 +142,7 @@ fun SignInScreen(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun AuthPreview() {
-    NotesTheme {
+    QuizHeadsTheme {
         SignInScreen({ _, _ -> })
     }
 }
