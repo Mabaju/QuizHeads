@@ -2,7 +2,7 @@ package com.example.quizheads.firebase.signin
 
 
 import com.example.quizheads.SIGN_IN_SCREEN
-import com.example.quizheads.NOTES_LIST_SCREEN
+import com.example.quizheads.MAIN_SCREEN
 import com.example.quizheads.SIGN_UP_SCREEN
 import com.example.quizheads.firebase.model.service.AccountService
 import com.example.quizheads.firebase.QuizHeadsViewModel
@@ -28,7 +28,7 @@ class SignInViewModel @Inject constructor(
     fun onSignInClick(openAndPopUp: (String, String) -> Unit) {
         launchCatching {
             accountService.signIn(email.value, password.value)
-            openAndPopUp(NOTES_LIST_SCREEN, SIGN_IN_SCREEN)
+            openAndPopUp(MAIN_SCREEN, SIGN_IN_SCREEN)
         }
     }
 

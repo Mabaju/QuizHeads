@@ -1,6 +1,6 @@
 package com.example.quizheads.firebase.signup
 
-import com.example.quizheads.NOTES_LIST_SCREEN
+import com.example.quizheads.MAIN_SCREEN
 import com.example.quizheads.SIGN_UP_SCREEN
 import com.example.quizheads.firebase.QuizHeadsViewModel
 import com.example.quizheads.firebase.model.service.AccountService
@@ -35,7 +35,7 @@ class SignUpViewModel @Inject constructor(
             }
 
             accountService.signUp(email.value, password.value)
-            openAndPopUp(NOTES_LIST_SCREEN, SIGN_UP_SCREEN)
+            openAndPopUp(MAIN_SCREEN, SIGN_UP_SCREEN)
         }
     }
 }

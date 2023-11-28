@@ -1,4 +1,4 @@
-package com.example.quizheads.firebase;
+package com.example.quizheads.firebase
 
 import android.util.Log
 import androidx.lifecycle.ViewModel

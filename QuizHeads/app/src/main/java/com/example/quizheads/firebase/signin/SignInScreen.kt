@@ -38,8 +38,6 @@ import com.example.quizheads.R
 import com.example.quizheads.ui.theme.QuizHeadsTheme
 import com.example.quizheads.ui.theme.Purple40
 
-// notes.app.ui.theme.NotesTheme
-// import com.notes.app.ui.theme.Purple40
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)

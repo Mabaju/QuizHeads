@@ -1,6 +1,6 @@
 package com.example.quizheads
 
-const val NOTES_LIST_SCREEN = "NotesListScreen"
+const val MAIN_SCREEN = "MainActivity"
 const val NOTE_SCREEN = "NoteScreen"
 const val SIGN_IN_SCREEN = "SignInScreen"
 const val SIGN_UP_SCREEN = "SignUpScreen"
