@@ -11,11 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.QuizHeads"
-        tools:targetApi="31">
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31"
+        android:name = ".NotesHiltApp">
         <activity
-            android:name=".firebase.splash.SplashViewModel"
+            android:name=".NotesActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.QuizHeads">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,31 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".QuizActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.QuizHeads"></activity>
-        <activity
-            android:name=".QuizDetailsActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.QuizHeads"></activity>
-        <activity
-            android:name=".QuizResultActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.QuizHeads"></activity>
-        <activity
-            android:name=".FriendsActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.QuizHeads"></activity>
-        <activity
-            android:name=".FriendsDetailsActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.QuizHeads"></activity>
     </application>
 
 </manifest>
