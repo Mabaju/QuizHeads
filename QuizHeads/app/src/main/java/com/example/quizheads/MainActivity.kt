@@ -26,11 +26,22 @@ import androidx.compose.ui.unit.sp
 import com.example.quizheads.component.MyAppBar
 import com.example.quizheads.ui.theme.QuizHeadsTheme
 import kotlinx.coroutines.launch
-
+import com.example.quizheads.firebase.LoginActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.example.quizheads.firebase.User
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Tjek om brugeren er logget ind
+        if (FirebaseAuth.getInstance().currentUser == null) {
+            // Brugeren er ikke logget ind, start LoginActivity
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish() // Afslutter MainActivity, da brugeren ikke er logget ind
+            return
+        }
+
         setContent {
 
             QuizHeadsTheme {
@@ -87,6 +98,22 @@ class MainActivity : ComponentActivity() {
                                     }
 
 
+                                    Button(onClick = {
+                                        // Log brugeren ud
+                                        FirebaseAuth.getInstance().signOut()
+
+                                        // Ryd User instansen
+                                        User.clear()
+
+                                        // Start LoginActivity
+                                        val intent = Intent(this@MainActivity, LoginActivity::class.java)
+                                        startActivity(intent)
+                                        finish() // Afslutter MainActivity
+                                    }) {
+                                        Text("Log ud",
+                                            fontSize = 20.sp, // Change font size
+                                            color = Color.Black) // Change text color
+                                    }
 
                                 }
                             }
