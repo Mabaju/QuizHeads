@@ -1,12 +1,20 @@
 package com.example.quizheads.firebase
 
-class LoginActivity : AppCompatActivity() {
+import android.app.Activity
+import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
+import com.example.quizheads.R  // Erstat med din korrekte R import, hvis nødvendigt
+
+class LoginActivity : Activity() {
 
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_login)  // Sørg for at R refererer til din korrekte R-klasse
 
         // Initialiser Firebase Auth
         auth = FirebaseAuth.getInstance()
@@ -16,8 +24,8 @@ class LoginActivity : AppCompatActivity() {
         val loginButton = findViewById<Button>(R.id.loginButton)
 
         loginButton.setOnClickListener {
-            val email = emailEditText.text.toString()
-            val password = passwordEditText.text.toString()
+            val email = emailEditText.text.toString().trim()
+            val password = passwordEditText.text.toString().trim()
 
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
@@ -27,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
                         // Naviger til din hovedaktivitet eller anden relevant skærm
                     } else {
                         // Hvis log ind fejler, vis en besked til brugeren.
-                        Toast.makeText(baseContext, "Authentication failed.",
+                        Toast.makeText(this, "Authentication failed.",
                             Toast.LENGTH_SHORT).show()
                     }
                 }
