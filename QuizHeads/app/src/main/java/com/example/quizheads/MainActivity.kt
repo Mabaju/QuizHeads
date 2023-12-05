@@ -33,6 +33,9 @@ import kotlinx.coroutines.launch
 import com.example.quizheads.firebase.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.example.quizheads.firebase.User
+import com.example.quizheads.QuizResultActivity
+
+
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,10 +91,7 @@ class MainActivity : ComponentActivity() {
                                     Button(modifier = Modifier.fillMaxWidth(),
                                         onClick = {
                                             val intent = Intent(
-                                                this@MainActivity,
-                                                QuizResultActivity::class.java
-                                            )
-                                            intent.putExtra("HasScore", false)
+                                                this@MainActivity, QuizResultActivity::class.java)
                                             startActivity(intent)
                                         }
                                     ) {
@@ -117,6 +117,24 @@ class MainActivity : ComponentActivity() {
                                             color = Color.Black // Change text color
                                         )
                                     }
+
+                                    Spacer(modifier = Modifier.height(16.dp)) // Tilføj lidt plads mellem knapperne
+
+                                    Button(modifier = Modifier.fillMaxWidth(),
+                                        onClick = {
+                                            FirebaseAuth.getInstance().signOut() // Log brugeren ud
+                                            val intent = Intent(this@MainActivity, LoginActivity::class.java)
+                                            startActivity(intent)
+                                            finish() // Afslutter MainActivity
+                                        }
+                                    ) {
+                                        Text(
+                                            "Log ud",
+                                            fontSize = 20.sp, // Change font size
+                                            color = Color.Black // Change text color
+                                        )
+                                    }
+
                                 }
                             }
                         }

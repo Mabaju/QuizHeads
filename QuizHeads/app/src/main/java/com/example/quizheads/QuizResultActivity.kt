@@ -5,138 +5,59 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.quizheads.person_api.Api
+import com.example.quizheads.firebase.User
 import com.example.quizheads.ui.theme.QuizHeadsTheme
 
-var totalScore = 0
-
 class QuizResultActivity : ComponentActivity() {
-    val api = Api()
-
-
-    private fun back() {
-        val intent = Intent(this@QuizResultActivity, QuizActivity::class.java)
-
-        // Add the following flags to clear the back stack up to ActivityA
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or
-                Intent.FLAG_ACTIVITY_SINGLE_TOP or
-                Intent.FLAG_ACTIVITY_NEW_TASK
-
-        startActivity(intent)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val Result = intent.getIntExtra("quizResult", 0)
-        val hasScore = intent.getBooleanExtra("HasScore", false)
-
-
+        val userId = User.getInstance("yourUserId").userId // Erstat "yourUserId" med den aktuelle brugers ID
         setContent {
             QuizHeadsTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Column {
-                        Row {
-                            Button(modifier = Modifier.width(195.dp),
-                                onClick = {
-
-                                    back()
-
-                                }) {
-                                Text(
-                                    "New Quiz",
-                                    fontSize = 20.sp, // Change font size
-                                    color = Color.Black
-                                ) // Change text color
-
-                            }
-                            Button(onClick = {
-                                val intent =
-                                    Intent(this@QuizResultActivity, MainActivity::class.java)
-
-                                // Add the following flags to clear the back stack up to ActivityA
-                                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or
-                                        Intent.FLAG_ACTIVITY_SINGLE_TOP or
-                                        Intent.FLAG_ACTIVITY_NEW_TASK
-
-                                startActivity(intent)
-
-                            }) {
-                                Text(
-                                    "Back to Frontpage",
-                                    fontSize = 20.sp, // Change font size
-                                    color = Color.Black
-                                ) // Change text color
-                            }
-                        }
-
-                        if (hasScore) {
-                            Text(
-                                text = "Resultat",
-                                fontSize = 100.sp, // Change font size
-                                modifier = Modifier.align(Alignment.CenterHorizontally)
-                            )
-
-                            Spacer(modifier = Modifier.height(40.dp))
-
-                            Row(modifier = Modifier.align(Alignment.CenterHorizontally)) {
-                                Text(
-                                    text = "Quiz score:  ",
-                                    fontSize = 50.sp, // Change font size
-                                    //modifier = Modifier.align(Alignment.CenterHorizontally)
-                                )
-                                Text(
-                                    text = Result.toString(),
-                                    fontSize = 50.sp, // Change font size
-                                    color = Color.Blue,
-                                    //modifier = Modifier.align(Alignment.CenterHorizontally)
-                                )
-                            }
-
-                            Spacer(modifier = Modifier.height(70.dp))
-                        }
-
-                        Text(
-                            text = "Your total score",
-                            fontSize = 50.sp,
-                            modifier = Modifier.align(Alignment.CenterHorizontally)
-                        )
-
-                        Spacer(modifier = Modifier.height(30.dp))
-
-                        totalScore = totalScore + Result
-                        Text(
-                            text = totalScore.toString(),
-                            fontSize = 50.sp,
-                            color = Color.Red,
-                            modifier = Modifier.align(Alignment.CenterHorizontally)
-                        )
+                    ScoreScreen(userId) {
+                        // Når brugeren trykker på "Go back", gå tilbage til MainActivity
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
                     }
                 }
             }
         }
     }
+}
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        back()
+@Composable
+fun ScoreScreen(userId: String, onGoBack: () -> Unit) {
+    val user = User.getInstance(userId)
+    Column {
+        Button(onClick = onGoBack) {
+            Text("Go back",
+                fontSize = 20.sp,
+                color = Color.Black)
+        }
+        Text("Din Score",
+            fontSize = 30.sp,
+            color = Color.Black)
+
+        Text("Antal quiz lavet: ${user.quizzesTaken}",
+            fontSize = 20.sp,
+            color = Color.Black)
+
+        Text("Score: ${user.totalScore}",
+            fontSize = 20.sp,
+            color = Color.Black)
     }
 }

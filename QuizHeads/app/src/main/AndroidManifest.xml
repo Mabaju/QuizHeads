@@ -26,13 +26,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ScoreActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.QuizHeads">
-        </activity>
-        <activity
-            android:name=".ScoreDetailsActivity"
+            android:name=".QuizResultActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.QuizHeads">
