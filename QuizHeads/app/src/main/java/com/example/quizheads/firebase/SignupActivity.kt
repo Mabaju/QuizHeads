@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import android.content.Intent
+import android.util.Log
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -52,8 +53,12 @@ class SignupActivity : Activity() {
                                 startActivity(Intent(this, MainActivity::class.java))
                                 finish()
                             }
-                            .addOnFailureListener {
-                                // Håndter fejl
+                            .addOnFailureListener { e ->
+                                // Log fejlen for detaljeret fejlfinding
+                                Log.e("FirestoreError", "Error writing document", e)
+
+                                // Vis en Toast med fejlbesked
+                                Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_LONG).show()
                             }
                     } else {
                         // Hvis tilmelding fejler, vis en besked til brugeren.

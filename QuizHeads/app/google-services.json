@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "362052900077",
-    "project_id": "quizheads-c79e0",
-    "storage_bucket": "quizheads-c79e0.appspot.com"
+    "project_number": "183496168136",
+    "project_id": "quizheads-792ef",
+    "storage_bucket": "quizheads-792ef.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:362052900077:android:6b92dc622c29318ca468e4",
+        "mobilesdk_app_id": "1:183496168136:android:2e9b01ab9b8160f38f8bfd",
         "android_client_info": {
           "package_name": "com.example.quizheads"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBbCUL1j81-FHAT3WNJRv03l5-v4mfOtlw"
+          "current_key": "AIzaSyD2uqK5xyW6K1XyDkmZ58SC6462tP8_pAQ"
         }
       ],
       "services": {
