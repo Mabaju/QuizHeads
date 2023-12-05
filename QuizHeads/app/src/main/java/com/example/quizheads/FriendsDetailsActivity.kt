@@ -31,29 +31,35 @@ class FriendsDetailsActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Column {
-                        Row{
+                        Row {
                             Button(onClick = {
-                                val intent = Intent(this@FriendsDetailsActivity, FriendsActivity::class.java)
+                                val intent =
+                                    Intent(this@FriendsDetailsActivity, FriendsActivity::class.java)
                                 startActivity(intent)
                             }) {
-                                Text("Go back",
+                                Text(
+                                    "Go back",
                                     fontSize = 20.sp, // Change font size
-                                    color = Color.Black) // Change text color
+                                    color = Color.Black
+                                ) // Change text color
 
                             }
                             Button(onClick = {
-                                val intent = Intent(this@FriendsDetailsActivity, MainActivity::class.java)
+                                val intent =
+                                    Intent(this@FriendsDetailsActivity, MainActivity::class.java)
                                 startActivity(intent)
                             }) {
-                                Text("Back to Frontpage",
+                                Text(
+                                    "Back to Frontpage",
                                     fontSize = 20.sp, // Change font size
-                                    color = Color.Black) // Change text color
+                                    color = Color.Black
+                                ) // Change text color
 
                             }
                         }
 
-                        FriendsDetails{
-                            api.getPerson(intent.getStringExtra("id")?:"")
+                        FriendsDetails {
+                            api.getPerson(intent.getStringExtra("id") ?: "")
                         }
                     }
                 }

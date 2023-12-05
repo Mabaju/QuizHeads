@@ -8,8 +8,7 @@ import androidx.compose.ui.Modifier
 import com.example.quizheads.person_api.Person
 
 @Composable
-
-fun FriendsOverview(friend: Person, onClick: (id:String)->Unit) {
+fun FriendsOverview(friend: Person, onClick: (id: String) -> Unit) {
     Column {
         Text(text = friend.name, modifier = Modifier.clickable { onClick(friend.id) })
     }

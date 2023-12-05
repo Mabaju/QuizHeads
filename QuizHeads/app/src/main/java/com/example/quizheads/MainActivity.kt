@@ -6,7 +6,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.DrawerValue
@@ -22,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.quizheads.component.MyAppBar
 import com.example.quizheads.ui.theme.QuizHeadsTheme
@@ -41,6 +45,8 @@ class MainActivity : ComponentActivity() {
             finish() // Afslutter MainActivity, da brugeren ikke er logget ind
             return
         }
+
+        val currentUser = User.getInstance(FirebaseAuth.getInstance().currentUser!!.uid)
 
         setContent {
 
@@ -62,59 +68,55 @@ class MainActivity : ComponentActivity() {
                                         "QuizHeads",
                                         fontSize = 50.sp, // Change font size
                                         color = Color.White, // Change text color
-                                        textAlign = TextAlign.Center // Center the text horizontally
+                                        modifier = Modifier.align(Alignment.CenterHorizontally) // Center the text horizontally
                                     )
 
-                                    Button(onClick = {
-                                        val intent = Intent(this@MainActivity, QuizActivity::class.java)
-                                        startActivity(intent)
-                                    }
+                                    Button(modifier = Modifier.fillMaxWidth(),
+                                        onClick = {
+                                            val intent =
+                                                Intent(this@MainActivity, QuizActivity::class.java)
+                                            startActivity(intent)
+                                        }
                                     ) {
-                                        Text("Quiz",
+                                        Text(
+                                            "Quiz",
                                             fontSize = 20.sp, // Change font size
-                                            color = Color.Black) // Change text color
+                                            color = Color.Black // Change text color
+                                        )
                                     }
 
-
-                                    Button(onClick = {
-                                        val intent = Intent(this@MainActivity, ScoreActivity::class.java)
-                                        startActivity(intent)
-                                    }
+                                    Button(modifier = Modifier.fillMaxWidth(),
+                                        onClick = {
+                                            val intent = Intent(
+                                                this@MainActivity,
+                                                QuizResultActivity::class.java
+                                            )
+                                            intent.putExtra("HasScore", false)
+                                            startActivity(intent)
+                                        }
                                     ) {
-                                        Text("Score",
+                                        Text(
+                                            "Score",
                                             fontSize = 20.sp, // Change font size
-                                            color = Color.Black) // Change text color
+                                            color = Color.Black // Change text color
+                                        )
                                     }
 
-
-                                    Button(onClick = {
-                                        val intent = Intent(this@MainActivity, FriendsActivity::class.java)
-                                        startActivity(intent)
-                                    }) {
-                                        Text("Friends",
+                                    Button(modifier = Modifier.fillMaxWidth(),
+                                        onClick = {
+                                            val intent =
+                                                Intent(
+                                                    this@MainActivity,
+                                                    FriendsActivity::class.java
+                                                )
+                                            startActivity(intent)
+                                        }) {
+                                        Text(
+                                            "Friends",
                                             fontSize = 20.sp, // Change font size
-                                            color = Color.Black) // Change text color
-
+                                            color = Color.Black // Change text color
+                                        )
                                     }
-
-
-                                    Button(onClick = {
-                                        // Log brugeren ud
-                                        FirebaseAuth.getInstance().signOut()
-
-                                        // Ryd User instansen
-                                        User.clear()
-
-                                        // Start LoginActivity
-                                        val intent = Intent(this@MainActivity, LoginActivity::class.java)
-                                        startActivity(intent)
-                                        finish() // Afslutter MainActivity
-                                    }) {
-                                        Text("Log ud",
-                                            fontSize = 20.sp, // Change font size
-                                            color = Color.Black) // Change text color
-                                    }
-
                                 }
                             }
                         }
@@ -123,7 +125,7 @@ class MainActivity : ComponentActivity() {
                         Scaffold(
                             topBar =
                             {
-                                MyAppBar(title = "menu", onMenu = {
+                                MyAppBar(title = "", onMenu = {
                                     if (drawerState.isOpen)
                                         scope.launch {
                                             drawerState.close()
@@ -132,36 +134,32 @@ class MainActivity : ComponentActivity() {
                                         scope.launch {
                                             drawerState.open()
                                         }
-
-
                                 })
                             },
                             content =
                             { padding ->
                                 Column(modifier = Modifier.padding(padding)) {
+
+                                    Spacer(modifier = Modifier.height(40.dp))
+
                                     Text(
-                                        "QuizHeads",
-                                        fontSize = 50.sp, // Change font size
+                                        "QuizHeads\n\nWelcome ${currentUser.firstName} ${currentUser.lastName}",
+                                        fontSize = 30.sp, // Change font size
                                         color = Color.Black, // Change text color
                                         textAlign = TextAlign.Center, // Center the text horizontally
-                                        )
+                                    )
                                     Box(
                                         modifier = Modifier
                                             .fillMaxSize()
                                             .padding(padding),
                                         contentAlignment = Alignment.Center
                                     ) {
-
                                     }
                                 }
                             })
                     }
                 )
             }
-
-
-
-
         }
     }
 }

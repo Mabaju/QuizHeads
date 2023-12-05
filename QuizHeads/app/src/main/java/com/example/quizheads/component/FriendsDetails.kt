@@ -10,17 +10,18 @@ import androidx.compose.ui.unit.sp
 import com.example.quizheads.person_api.Person
 
 @Composable
-fun FriendsDetails(fetchFriend: ()->Person?) {
-    val friend = remember{ mutableStateOf<Person?>(null) }
+fun FriendsDetails(fetchFriend: () -> Person?) {
+    val friend = remember { mutableStateOf<Person?>(null) }
     LaunchedEffect(key1 = Unit) {
         friend.value = fetchFriend()
     }
 
     Column {
-        Text(text = friend.value?.name.toString(),
-            fontSize = 30.sp)
+        Text(
+            text = friend.value?.name.toString(),
+            fontSize = 30.sp
+        )
         Text(text = "Antal quiz lavet: ??????????")
         Text(text = "Score: ????????")
-
     }
 }

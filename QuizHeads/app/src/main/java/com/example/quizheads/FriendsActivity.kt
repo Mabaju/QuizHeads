@@ -33,18 +33,25 @@ class FriendsActivity : ComponentActivity() {
                             val intent = Intent(this@FriendsActivity, MainActivity::class.java)
                             startActivity(intent)
                         }) {
-                            Text("Go back",
+                            Text(
+                                "Go back",
                                 fontSize = 20.sp, // Change font size
-                                color = Color.Black) // Change text color
+                                color = Color.Black
+                            ) // Change text color
 
                         }
-                        Text("Friends",
+
+                        Text(
+                            "Friends",
                             fontSize = 30.sp, // Change font size
-                            color = Color.Black) // Change text color)
+                            color = Color.Black
+                        ) // Change text color)
+
                         FriendsList(fetchFriends = {
                             api.getPersons()
                         }, onClick = {
-                            val intent = Intent(this@FriendsActivity, FriendsDetailsActivity::class.java)
+                            val intent =
+                                Intent(this@FriendsActivity, FriendsDetailsActivity::class.java)
                             intent.putExtra("id", it)
                             startActivity(intent)
                         })
