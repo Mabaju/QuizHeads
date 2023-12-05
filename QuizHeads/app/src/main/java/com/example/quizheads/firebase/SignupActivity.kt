@@ -8,6 +8,8 @@ import android.widget.Toast
 import android.content.Intent
 
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+
 import com.example.quizheads.R
 import com.example.quizheads.MainActivity
 class SignupActivity : Activity() {
@@ -38,14 +40,27 @@ class SignupActivity : Activity() {
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        // Tilmelding succesfuld, start MainActivity
-                        startActivity(Intent(this, MainActivity::class.java))
-                        finish()
+                        val userId = auth.currentUser?.uid ?: ""
+                        val userEmail = email // E-mail indtastet af brugeren
+                        val firstName = findViewById<EditText>(R.id.firstNameEditText).text.toString().trim()
+                        val lastName = findViewById<EditText>(R.id.lastNameEditText).text.toString().trim()
+
+                        val user = User(userId, userEmail, firstName, lastName, 0, 0)
+                        FirebaseFirestore.getInstance().collection("users").document(userId).set(user)
+                            .addOnSuccessListener {
+                                // Bruger oprettet og gemt i Firestore
+                                startActivity(Intent(this, MainActivity::class.java))
+                                finish()
+                            }
+                            .addOnFailureListener {
+                                // Håndter fejl
+                            }
                     } else {
                         // Hvis tilmelding fejler, vis en besked til brugeren.
                         Toast.makeText(this, "Signup failed.", Toast.LENGTH_SHORT).show()
                     }
                 }
+
         }
     }
 }

@@ -1,8 +1,13 @@
 package com.example.quizheads.firebase
 
-class User(val userId: String) {
-    // Du kan tilføje flere brugerrelaterede egenskaber her
-    // For eksempel, brugerens navn, e-mail osv.
+class User(
+    val userId: String,
+    var email: String = "",
+    var firstName: String = "",
+    var lastName: String = "",
+    var quizzesTaken: Int = 0,
+    var totalScore: Int = 0
+) {
 
     companion object {
         private var instance: User? = null
