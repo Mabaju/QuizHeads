@@ -22,7 +22,8 @@ import androidx.compose.ui.unit.sp
 import com.example.quizheads.component.QuizDetails
 import com.example.quizheads.person_api.Api
 import com.example.quizheads.ui.theme.QuizHeadsTheme
-
+import com.google.firebase.auth.FirebaseAuth
+import com.example.quizheads.firebase.User
 class QuizDetailsActivity : ComponentActivity() {
     val api = Api()
 
@@ -66,20 +67,23 @@ class QuizDetailsActivity : ComponentActivity() {
                                     color = Color.Black // Change text color
                                 )
                             }
+
                         }
 
                         Spacer(modifier = Modifier.height(20.dp))
 
                         QuizDetails(api.getQuizById(intent.getStringExtra("id") ?: ""),
-                            onLastClick = {
-                                val intent =
-                                    Intent(this@QuizDetailsActivity, QuizResultActivity::class.java)
+                            onLastClick = { correctAnswersCount ->
+                                val user = User.getInstance(FirebaseAuth.getInstance().currentUser!!.uid)
 
-                                intent.putExtra("quizResult", it.toInt())
-                                intent.putExtra("HasScore", true)
+                                // Konverter correctAnswersCount til Int, hvis det er nødvendigt
+                                val correctAnswersCountInt = correctAnswersCount.toIntOrNull() ?: 0
+                                user.updateScore(correctAnswersCountInt)
 
+                                val intent = Intent(this@QuizDetailsActivity, QuizResultActivity::class.java)
                                 startActivity(intent)
                             })
+
                     }
                 }
             }

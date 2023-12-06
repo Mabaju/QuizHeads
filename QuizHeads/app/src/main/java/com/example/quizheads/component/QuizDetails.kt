@@ -45,14 +45,6 @@ fun QuizDetails(
 
 
     Column {
-        /*Text(
-            text = quiz.value?.name.toString(),
-            fontSize = 50.sp,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
-                .height(160.dp),
-            lineHeight = 50.sp,
-            textAlign = TextAlign.Center
-        )*/
         HeaderText(text = quiz.value?.name.toString(), Modifier.align(Alignment.CenterHorizontally)
             .height(160.dp))
 
@@ -70,7 +62,7 @@ fun QuizDetails(
         Button(modifier = Modifier.fillMaxWidth(),
             onClick = {
             val buttonNr = 1
-            if (buttonNr == quiz.value?.questions?.get(currentIndex)?.answer) {
+            if (buttonNr == quiz.value?.questions?.get(currentIndex)?.correctAnswer) {
                 quizResult++
             }
             Log.d("quizResult", "quizResult = " + quizResult)
@@ -92,7 +84,7 @@ fun QuizDetails(
         Button(modifier = Modifier.fillMaxWidth(),
             onClick = {
             val buttonNr = 2
-            if (buttonNr == quiz.value?.questions?.get(currentIndex)?.answer) {
+            if (buttonNr == quiz.value?.questions?.get(currentIndex)?.correctAnswer) {
                 quizResult++
             }
             Log.d("quizResult", "quizResult = " + quizResult)
@@ -113,7 +105,7 @@ fun QuizDetails(
         Button(modifier = Modifier.fillMaxWidth(),
             onClick = {
             val buttonNr = 3
-            if (buttonNr == quiz.value?.questions?.get(currentIndex)?.answer) {
+            if (buttonNr == quiz.value?.questions?.get(currentIndex)?.correctAnswer) {
                 quizResult++
             }
             Log.d("quizResult", "quizResult = " + quizResult)
@@ -134,7 +126,7 @@ fun QuizDetails(
         Button(modifier = Modifier.fillMaxWidth(),
             onClick = {
             val buttonNr = 4
-            if (buttonNr == quiz.value?.questions?.get(currentIndex)?.answer) {
+            if (buttonNr == quiz.value?.questions?.get(currentIndex)?.correctAnswer) {
                 quizResult++
             }
             Log.d("quizResult", "quizResult = " + quizResult)

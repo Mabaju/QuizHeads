@@ -10,6 +10,15 @@ class User(
     var quizzesTaken: Int = 0,
     var totalScore: Int = 0
 ) {
+    fun updateScore(newScore: Int) {
+        totalScore += newScore
+        quizzesTaken++
+        val userMap = mapOf(
+            "quizzesTaken" to quizzesTaken,
+            "totalScore" to totalScore
+        )
+        FirebaseFirestore.getInstance().collection("users").document(userId).update(userMap)
+    }
 
     companion object {
         private var instance: User? = null
