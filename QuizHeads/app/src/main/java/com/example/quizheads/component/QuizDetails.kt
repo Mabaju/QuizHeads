@@ -46,17 +46,17 @@ fun QuizDetails(
 
     Column {
         HeaderText(text = quiz.value?.name.toString(), Modifier.align(Alignment.CenterHorizontally)
-            .height(160.dp))
+            .height(120.dp))
 
-        Spacer(modifier = Modifier.height(40.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
         Text(text = quiz.value?.questions?.get(currentIndex)?.question ?: "",
-            modifier = Modifier.height(200.dp),
-            fontSize = 30.sp,
-            lineHeight = 30.sp
+            modifier = Modifier.height(100.dp),
+            fontSize = 20.sp,
+            lineHeight = 20.sp
             )
 
-        Spacer(modifier = Modifier.height(40.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
 
         Button(modifier = Modifier.fillMaxWidth(),
@@ -78,7 +78,7 @@ fun QuizDetails(
 
         }) {
             Text(text = quiz.value?.questions?.get(currentIndex)?.answerPosibilities?.get(0) ?: "",
-                fontSize = 20.sp)
+                fontSize = 15.sp)
         }
 
         Button(modifier = Modifier.fillMaxWidth(),
@@ -99,7 +99,7 @@ fun QuizDetails(
             }
         }) {
             Text(text = quiz.value?.questions?.get(currentIndex)?.answerPosibilities?.get(1) ?: "",
-                fontSize = 20.sp)
+                fontSize = 15.sp)
         }
 
         Button(modifier = Modifier.fillMaxWidth(),
@@ -120,7 +120,7 @@ fun QuizDetails(
             }
         }) {
             Text(text = quiz.value?.questions?.get(currentIndex)?.answerPosibilities?.get(2) ?: "",
-                fontSize = 20.sp)
+                fontSize = 15.sp)
         }
 
         Button(modifier = Modifier.fillMaxWidth(),
@@ -141,7 +141,7 @@ fun QuizDetails(
             }
         }) {
             Text(text = quiz.value?.questions?.get(currentIndex)?.answerPosibilities?.get(3) ?: "",
-                fontSize = 20.sp)
+                fontSize = 15.sp)
         }
 
     }

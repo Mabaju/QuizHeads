@@ -131,6 +131,9 @@ class MainActivity : ComponentActivity() {
                                             onClick = {
                                                 FirebaseAuth.getInstance()
                                                     .signOut() // Log brugeren ud
+
+                                                User.clear() // Nulstil User-instansen
+
                                                 val intent = Intent(
                                                     this@MainActivity,
                                                     LoginActivity::class.java
@@ -140,7 +143,7 @@ class MainActivity : ComponentActivity() {
                                             }
                                         ) {
                                             Text(
-                                                "Log ud",
+                                                "Log out",
                                                 fontSize = 20.sp, // Change font size
                                                 color = Color.Black // Change text color
                                             )
