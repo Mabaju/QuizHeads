@@ -51,6 +51,29 @@ class User(
             }
     }
 
+    fun fetchFriendData(friendId: String, onComplete: (User?) -> Unit) {
+        FirebaseFirestore.getInstance().collection("users").document(friendId).get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    val friend = User(
+                        userId = friendId,
+                        email = document.getString("email") ?: "",
+                        firstName = document.getString("firstName") ?: "",
+                        lastName = document.getString("lastName") ?: "",
+                        quizzesTaken = document.getLong("quizzesTaken")?.toInt() ?: 0,
+                        totalScore = document.getLong("totalScore")?.toInt() ?: 0
+                    )
+                    onComplete(friend)
+                } else {
+                    onComplete(null)
+                }
+            }
+            .addOnFailureListener {
+                // Håndter fejl
+                onComplete(null)
+            }
+    }
+
     companion object {
         private var instance: User? = null
         private val db = FirebaseFirestore.getInstance()

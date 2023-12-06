@@ -13,7 +13,7 @@ fun FriendsDetails(friend: User?) {
             text = "${friend?.firstName} ${friend?.lastName}",
             fontSize = 30.sp
         )
-        Text(text = "Antal quiz lavet: ${friend?.quizzesTaken}")
+        Text(text = "Quizzes done: ${friend?.quizzesTaken}")
         Text(text = "Score: ${friend?.totalScore}")
     }
 }
