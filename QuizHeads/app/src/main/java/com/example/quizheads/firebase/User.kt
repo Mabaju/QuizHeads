@@ -8,7 +8,8 @@ class User(
     var firstName: String = "",
     var lastName: String = "",
     var quizzesTaken: Int = 0,
-    var totalScore: Int = 0
+    var totalScore: Int = 0,
+    var friendsList: MutableList<String> = mutableListOf()
 ) {
     fun updateScore(newScore: Int) {
         totalScore += newScore
@@ -18,6 +19,36 @@ class User(
             "totalScore" to totalScore
         )
         FirebaseFirestore.getInstance().collection("users").document(userId).update(userMap)
+    }
+
+    fun fetchFriendsList(onComplete: (List<String>) -> Unit) {
+        FirebaseFirestore.getInstance().collection("users").document(userId)
+            .get()
+            .addOnSuccessListener { document ->
+                val friendsList = document["friendsList"] as? List<String> ?: listOf()
+                this.friendsList = friendsList.toMutableList()
+                onComplete(friendsList)
+            }
+    }
+
+    fun fetchUserData(onComplete: () -> Unit) {
+        FirebaseFirestore.getInstance().collection("users").document(userId)
+            .get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    this.email = document.getString("email") ?: ""
+                    this.firstName = document.getString("firstName") ?: ""
+                    this.lastName = document.getString("lastName") ?: ""
+                    this.quizzesTaken = document.getLong("quizzesTaken")?.toInt() ?: 0
+                    this.totalScore = document.getLong("totalScore")?.toInt() ?: 0
+                    this.friendsList = (document["friendsList"] as? List<String>)?.toMutableList()
+                        ?: mutableListOf()
+                    onComplete()
+                }
+            }
+            .addOnFailureListener {
+                // Håndter fejl
+            }
     }
 
     companion object {

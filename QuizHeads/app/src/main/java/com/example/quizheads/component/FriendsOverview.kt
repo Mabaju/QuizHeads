@@ -5,11 +5,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.quizheads.person_api.Person
+import com.example.quizheads.firebase.User
 
 @Composable
-fun FriendsOverview(friend: Person, onClick: (id: String) -> Unit) {
+fun FriendsOverview(friend: User, onClick: (id: String) -> Unit) {
     Column {
-        Text(text = friend.name, modifier = Modifier.clickable { onClick(friend.id) })
+        Text(text = "${friend.firstName} ${friend.lastName}", modifier = Modifier.clickable { onClick(friend.userId) })
     }
 }
