@@ -41,6 +41,12 @@ class QuizDetailsActivity : ComponentActivity() {
                 ) {
                     var searchResults by remember { mutableStateOf(listOf<WikipediaResult>()) }
                     var currentIndex by remember { mutableStateOf(0) }
+                    var previousIndex by remember { mutableStateOf(-1) }
+
+                    if (currentIndex != previousIndex) {
+                        searchResults = listOf() // Nulstil søgeresultaterne
+                        previousIndex = currentIndex
+                    }
 
                     LazyColumn {
                         item {

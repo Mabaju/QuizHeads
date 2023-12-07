@@ -168,25 +168,31 @@ class MainActivity : ComponentActivity() {
                                             }
                                     })
                                 },
-                                content =
-                                { padding ->
+                                content = { padding ->
                                     Column(modifier = Modifier.padding(padding)) {
-
                                         Spacer(modifier = Modifier.height(40.dp))
 
                                         Text(
-                                            "QuizHeads\n\nWelcome ${user.firstName} ${user.lastName}",
-                                            fontSize = 30.sp, // Change font size
-                                            color = Color.Black, // Change text color
-                                            textAlign = TextAlign.Center, // Center the text horizontally
-                                        )
-                                        Box(
+                                            "QuizHeads",
+                                            fontSize = 60.sp,
+                                            color = Color.Black,
+                                            textAlign = TextAlign.Center,
                                             modifier = Modifier
-                                                .fillMaxSize()
-                                                .padding(padding),
-                                            contentAlignment = Alignment.Center
-                                        ) {
-                                        }
+                                                .align(Alignment.CenterHorizontally)
+                                                .fillMaxWidth()
+                                        )
+
+                                        Spacer(modifier = Modifier.height(20.dp))
+
+                                        Text(
+                                            "Welcome ${user.firstName} ${user.lastName}",
+                                            fontSize = 20.sp,
+                                            color = Color.Black,
+                                            textAlign = TextAlign.Center,
+                                            modifier = Modifier
+                                                .align(Alignment.CenterHorizontally)
+                                                .fillMaxWidth()
+                                        )
                                     }
                                 })
                         }

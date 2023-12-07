@@ -42,9 +42,10 @@ fun QuizDetails(
         mutableStateOf(0)
     }
 
-    var currentIndex by remember {
-        mutableStateOf(0)
+    var localCurrentIndex by remember {
+        mutableStateOf(currentIndex)
     }
+
 
 
     Column {
@@ -72,86 +73,78 @@ fun QuizDetails(
 
         Button(modifier = Modifier.fillMaxWidth(),
             onClick = {
-            val buttonNr = 1
-            if (buttonNr == quiz.value?.questions?.get(currentIndex)?.correctAnswer) {
-                quizResult++
-            }
-            Log.d("quizResult", "quizResult = " + quizResult)
-            if (quiz.value?.questions?.size!! - 1 > currentIndex) {
-                // Increment the currentQuestionIndex to move to the next question
-                currentIndex++
-                Log.d("currentindex", "current value = " + currentIndex)
-            } else {
-                Log.d("onLastClick", "Go to results")
-                //Go to result
-                onLastClick(quizResult.toString())
-            }
+                val buttonNr = 1
+                if (buttonNr == quiz.value?.questions?.get(localCurrentIndex)?.correctAnswer) {
+                    quizResult++
+                }
+                if (quiz.value?.questions?.size!! - 1 > localCurrentIndex) {
+                    val newIndex = localCurrentIndex + 1
+                    localCurrentIndex = newIndex
+                    onIndexChanged(newIndex) // Opdater currentIndex og nulstil søgeresultaterne
+                } else {
+                    // Håndter afslutning af quiz
+                    onLastClick(quizResult.toString())
+                }
+            }) {
+            Text(text = quiz.value?.questions?.get(localCurrentIndex)?.answerPosibilities?.get(0) ?: "",
+                fontSize = 15.sp)
+        }
 
-        }) {
-            Text(text = quiz.value?.questions?.get(currentIndex)?.answerPosibilities?.get(0) ?: "",
+
+        Button(modifier = Modifier.fillMaxWidth(),
+            onClick = {
+                val buttonNr = 2
+                if (buttonNr == quiz.value?.questions?.get(localCurrentIndex)?.correctAnswer) {
+                    quizResult++
+                }
+                if (quiz.value?.questions?.size!! - 1 > localCurrentIndex) {
+                    val newIndex = localCurrentIndex + 1
+                    localCurrentIndex = newIndex
+                    onIndexChanged(newIndex) // Opdater currentIndex og nulstil søgeresultaterne
+                } else {
+                    // Håndter afslutning af quiz
+                    onLastClick(quizResult.toString())
+                }
+            }) {
+            Text(text = quiz.value?.questions?.get(localCurrentIndex)?.answerPosibilities?.get(1) ?: "",
                 fontSize = 15.sp)
         }
 
         Button(modifier = Modifier.fillMaxWidth(),
             onClick = {
-            val buttonNr = 2
-            if (buttonNr == quiz.value?.questions?.get(currentIndex)?.correctAnswer) {
-                quizResult++
-            }
-            Log.d("quizResult", "quizResult = " + quizResult)
-            if (quiz.value?.questions?.size!! - 1 > currentIndex) {
-                // Increment the currentQuestionIndex to move to the next question
-                currentIndex++
-                Log.d("currentindex", "current value = " + currentIndex)
-            } else {
-                Log.d("onLastClick", "Go to results")
-                //Go to result
-                onLastClick(quizResult.toString())
-            }
-        }) {
-            Text(text = quiz.value?.questions?.get(currentIndex)?.answerPosibilities?.get(1) ?: "",
+                val buttonNr = 3
+                if (buttonNr == quiz.value?.questions?.get(localCurrentIndex)?.correctAnswer) {
+                    quizResult++
+                }
+                if (quiz.value?.questions?.size!! - 1 > localCurrentIndex) {
+                    val newIndex = localCurrentIndex + 1
+                    localCurrentIndex = newIndex
+                    onIndexChanged(newIndex) // Opdater currentIndex og nulstil søgeresultaterne
+                } else {
+                    // Håndter afslutning af quiz
+                    onLastClick(quizResult.toString())
+                }
+            }) {
+            Text(text = quiz.value?.questions?.get(localCurrentIndex)?.answerPosibilities?.get(2) ?: "",
                 fontSize = 15.sp)
         }
 
         Button(modifier = Modifier.fillMaxWidth(),
             onClick = {
-            val buttonNr = 3
-            if (buttonNr == quiz.value?.questions?.get(currentIndex)?.correctAnswer) {
-                quizResult++
-            }
-            Log.d("quizResult", "quizResult = " + quizResult)
-            if (quiz.value?.questions?.size!! - 1 > currentIndex) {
-                // Increment the currentQuestionIndex to move to the next question
-                currentIndex++
-                Log.d("currentindex", "current value = " + currentIndex)
-            } else {
-                Log.d("onLastClick", "Go to results")
-                //Go to result
-                onLastClick(quizResult.toString())
-            }
-        }) {
-            Text(text = quiz.value?.questions?.get(currentIndex)?.answerPosibilities?.get(2) ?: "",
-                fontSize = 15.sp)
-        }
-
-        Button(modifier = Modifier.fillMaxWidth(),
-            onClick = {
-            val buttonNr = 4
-            if (buttonNr == quiz.value?.questions?.get(currentIndex)?.correctAnswer) {
-                quizResult++
-            }
-            Log.d("quizResult", "quizResult = " + quizResult)
-            if (quiz.value?.questions?.size!! - 1 > currentIndex) {
-                // Increment the currentQuestionIndex to move to the next question
-                currentIndex++
-                Log.d("currentindex", "current value = " + currentIndex)
-            } else {
-                Log.d("onLastClick", "Go to results")
-                //Go to result
-                onLastClick(quizResult.toString())
-            }
-        }) {
-            Text(text = quiz.value?.questions?.get(currentIndex)?.answerPosibilities?.get(3) ?: "",
+                val buttonNr = 4
+                if (buttonNr == quiz.value?.questions?.get(localCurrentIndex)?.correctAnswer) {
+                    quizResult++
+                }
+                if (quiz.value?.questions?.size!! - 1 > localCurrentIndex) {
+                    val newIndex = localCurrentIndex + 1
+                    localCurrentIndex = newIndex
+                    onIndexChanged(newIndex) // Opdater currentIndex og nulstil søgeresultaterne
+                } else {
+                    // Håndter afslutning af quiz
+                    onLastClick(quizResult.toString())
+                }
+            }) {
+            Text(text = quiz.value?.questions?.get(localCurrentIndex)?.answerPosibilities?.get(3) ?: "",
                 fontSize = 15.sp)
         }
 
