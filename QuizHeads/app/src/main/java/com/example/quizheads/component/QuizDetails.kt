@@ -28,7 +28,8 @@ import com.example.quizheads.ui.theme.QuizHeadsTheme
 @Composable
 fun QuizDetails(
     fetchQuiz: Quiz?,
-    onLastClick: (id: String) -> Unit
+    onLastClick: (id: String) -> Unit,
+    onSearchClick: (String) -> Unit
 ) {
     val quiz = remember { mutableStateOf<Quiz?>(null) }
     LaunchedEffect(key1 = Unit) {
@@ -56,7 +57,15 @@ fun QuizDetails(
             lineHeight = 20.sp
             )
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(10.dp))
+        Button(onClick = {
+            quiz.value?.questions?.get(currentIndex)?.question?.let { question ->
+                onSearchClick(question)
+            }
+        }) {
+            Text("Search for answer on wikipedia")
+        }
+        Spacer(modifier = Modifier.height(10.dp))
 
 
         Button(modifier = Modifier.fillMaxWidth(),
