@@ -29,7 +29,9 @@ import com.example.quizheads.ui.theme.QuizHeadsTheme
 fun QuizDetails(
     fetchQuiz: Quiz?,
     onLastClick: (id: String) -> Unit,
-    onSearchClick: (String) -> Unit
+    onSearchClick: (String) -> Unit,
+    currentIndex: Int,
+    onIndexChanged: (Int) -> Unit
 ) {
     val quiz = remember { mutableStateOf<Quiz?>(null) }
     LaunchedEffect(key1 = Unit) {

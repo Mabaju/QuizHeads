@@ -40,6 +40,7 @@ class QuizDetailsActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
                 ) {
                     var searchResults by remember { mutableStateOf(listOf<WikipediaResult>()) }
+                    var currentIndex by remember { mutableStateOf(0) }
 
                     LazyColumn {
                         item {
@@ -91,6 +92,13 @@ class QuizDetailsActivity : ComponentActivity() {
                                     onSearchClick = { question ->
                                         searchWikipedia(question) { results ->
                                             searchResults = results
+                                        }
+                                    },
+                                    currentIndex = currentIndex,
+                                    onIndexChanged = { newIndex ->
+                                        if (newIndex != currentIndex) {
+                                            currentIndex = newIndex
+                                            searchResults = listOf() // Nulstil søgeresultaterne
                                         }
                                     }
                                 )
